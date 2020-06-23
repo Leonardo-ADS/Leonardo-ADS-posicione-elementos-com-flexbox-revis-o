@@ -1,0 +1,209 @@
+/*
+    container - É nele que definimos o flexbox. Devemos analisar quem é o pai da tag(tag que envolve as outras)
+    justify-content: space-between; - utilizando não deixa espaço sobrando para trabalhar
+
+    display: inline - Usando não permite modificar width e height
+    display: inline-block - É muito mais interessante na maioria dos casos do que o display: inline, permite mexer width e height
+    display: flex - Permite os elementos ficarem um do lado do outro, permite espaçar os elementos de forma mais intuitiva e sem ter que fazer cálculos. Além disso ele também permite alinhar os elementos verticalmente de forma fácil.
+
+    justify-content: space-between; - Deixa os elementos do lado direito e lado esquerdo EX: imagem e menu
+    justify-content: space-around; - Deixa os elemento ao redor deles
+
+    align-items: center; - Deixa os elementos alinhados verticalmente e centralizados
+
+    flex-direction: ; - Qual direção queremos o flex e faz a alteração dos eixos.
+
+    flex-wrap: wrap; Faz quebra de coluna
+
+    flex-flow: column wrap; - Atalho escolher o tipo de direção e a quebra
+    
+    order: ; - Altera a ordem da lista
+    
+    align-self -  faz com que ele se alinhe individualmente.
+
+
+*/
+
+/*
+    OBS: Para verificar navegadores que suportam flexbox  ou outras propriedades acesse: https://caniuse.com/
+    Para utilizar o flexbox devemos iniciar com display: flex;
+
+    Para mais informações sobre flexbox acesse sua documentação: https://developer.mozilla.org/pt-BR/docs/Web/CSS/CSS_Flexible_Box_Layout/Conceitos_Basicos_do_Flexbox
+
+    Para mais propriedades flexbox acessar: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+    Podemos distribuir os elementos dentro do pai de diversas formas, podemos por exemplo:
+    Colocar todo espaço à esquerda, jogando o conteúdo para direita com justify-content: flex-end.
+    Colocar todo espaço à direita, jogando o conteúdo para esquerda com justify-content: flex-start (que é o padrão).
+    Colocar todo espaço à esquerda e à direita, jogando o conteúdo para o meio com justify-content: center.
+    Colocar todo espaço entre os elementos como vimos antes usando justify-content: space-between.
+    Colocar o espaço em volta dos elementos. Podemos usar o justify-content: space-around
+
+    Para aproveitar o espaço precisamos colocar os elementos um em baixo do outro. Para fazer isso devemos colocar flex-direction: column.
+
+    Quando colocamos display: flex em um elemento, o navegador passa a considerar esse elemento como um flex container.
+    Os filhos de um flex container por sua vez também ganham um nome, são chamados de flex items.
+
+    As propriedades que funcionam SOMENTE no flex container são: justify-content, align-items, flex-direction, flex-wrap
+    As propriedades que funcionam SOMENTE no flex items são: order, flex-grow, flex-shrink
+    OBS: A propriedade display: flex pode ser usada nos dois. Se for usada em um flex item esse elemento será tanto um flex item quanto um flex container.
+
+    A propriedade flex-basis serve para definir uma largura ou altura para o flex item. Se o flex container tiver com flex-direction: column, o flex-basis no flex item servirá para definir uma height. Caso o flex-direction: row, ele funciona como um width.
+
+    para condensar as propriedades flex-grow, flex-shrink e flex-basis utilizamos a propriedade FLEX com sua ordem de valor: flex-grow, flex-shrink e flex-basis
+
+*/
+
+/*Modifica a classe conteiner contido dentro da classe cabecalhoPrincipaal*/
+.cabecalhoPrincipal .container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.cabecalhoPrincipal-nav{
+    display: flex;
+}
+
+.rodapePrincipal-patrocinadores .container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.rodapePrincipal-patrocinadores-list{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 70%;
+    margin-right: 5%;
+}
+
+.rodapePrincipal-contatoForm{
+    width: 25%;
+}
+
+.rodapePrincipal-contatoForm-fieldset{
+    display: flex;
+}
+
+.rodapePrincipal-navMap-list{
+    display: flex;
+   /*
+    
+   Qual direção do flex queremos
+    flex-direction: column;
+    
+    Faz quebra de coluna
+    flex-wrap: wrap;    
+    
+    */
+    
+    flex-flow: column wrap;
+    height: 240px;
+}
+
+.conteudoPrincipal-cursos{
+    display: flex;
+    flex-wrap: wrap;
+    /*inverte a ordem de baixo para cima
+    flex-wrap: wrap-reverse;
+    */
+}
+
+.conteudoPrincipal-cursos-link{
+    width: 23%;
+    margin: 1%;
+}
+
+.conteudoPrincipal-cursos-link:nth-child(4n){
+    margin-right: 0;
+}
+
+.conteudoPrincipal-cursos-link:nth-child(4n+1){
+    margin-left: 0;
+}
+
+.videoSobre .container{
+    display: flex;
+
+}
+
+.videoSobre-sobre{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+}
+
+
+.videoSobre-sobre-list{
+    flex-grow: 1;
+}
+
+.videoSobre-video{
+    flex-grow: 1;
+    flex-shrink: 2;
+}
+
+
+/*Parte mobile*/
+@media(max-width: 768px){
+
+    .cabecalhoPrincipal-nav{
+        flex-direction: column;
+    }
+
+    .cabecalhoPrincipal .container{
+        flex-direction: column; 
+        align-items: initial;
+        text-align: center;
+    }
+
+    .conteudoPrincipal-cursos{
+        flex-direction: column;
+        
+    }
+
+    .conteudoPrincipal-cursos-link{
+        width: 100%;
+    }
+
+    .rodapePrincipal-navMap-list{
+        height: auto;
+    }
+
+    .rodapePrincipal-patrocinadores .container{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rodapePrincipal-patrocinadores-list{
+        margin: 0;
+        width: 100%;
+    }
+
+    .rodapePrincipal-contatoForm{
+        width: 100%;
+    }
+
+    .rodapePrincipal-contatoForm-fieldset{
+        justify-content: center;
+    }
+
+    /*flex order - alterando a ordem */
+    .cabecalhoPrincipal-nav-link-app{
+        order: -1;
+    }
+
+    .videoSobre .container{
+        flex-direction: column;
+    }
+
+    .videoSobre-video{
+        margin: 0 auto;
+    }
+
+    
+
+}
